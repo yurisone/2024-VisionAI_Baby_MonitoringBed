@@ -188,6 +188,7 @@ def run(
                     
 
                     print(f"Bounding Box Center: {box_center_x}, Image Center: {image_center_x}")
+
                     
                     # 'person'감지됨을 확인하는 클래스
                     if c == 0:
