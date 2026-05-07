@@ -3,24 +3,22 @@ import cv2
 
 app = Flask(__name__)
 
-# 카메라를 초기화합니다 (기본 카메라 사용)
+# 웹캠 초기화 (기본 카메라 사용)
 camera = cv2.VideoCapture(0)
 
 def generate_frames():
     while True:
-        # 카메라에서 프레임을 읽습니다
+        # 카메라에서 프레임을 읽기
         success, frame = camera.read()
         if not success:
             break
         else:
-            # YOLOv5를 여기서 적용할 수 있습니다 (선택 사항)
-            # 예: frame = yolov5_inference(frame)
 
-            # 프레임을 JPEG로 인코딩합니다
+            # 프레임을 JPEG로 인코딩
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             
-            # 프레임을 전송합니다
+            # 프레임을 전송
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
